@@ -1,502 +1,976 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Arafian Dev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#dc143c",
+              secondary: "#8b0000",
+              accent: "#ff4500",
+            },
+            fontFamily: {
+              poppins: ["Poppins", "sans-serif"],
+              montserrat: ["Montserrat", "sans-serif"],
+            },
+            animation: {
+              rotate: "rotate 20s linear infinite",
+              wave: "wave 2s infinite",
+              blink: "blink 1s infinite",
+              slide: "slide 30s linear infinite",
+            },
+            keyframes: {
+              rotate: {
+                from: { transform: "rotate(0deg)" },
+                to: { transform: "rotate(360deg)" },
+              },
+              wave: {
+                "0%": { transform: "rotate(0deg)" },
+                "10%": { transform: "rotate(-10deg)" },
+                "20%": { transform: "rotate(12deg)" },
+                "30%": { transform: "rotate(-10deg)" },
+                "40%": { transform: "rotate(9deg)" },
+                "50%": { transform: "rotate(0deg)" },
+                "100%": { transform: "rotate(0deg)" },
+              },
+              blink: {
+                "0%, 50%": { opacity: "1" },
+                "51%, 100%": { opacity: "0" },
+              },
+              slide: {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(-50%)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Hero Section */
+      .hero-section {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 50px;
+        overflow: hidden;
+        /* background: #0a0a0a; optional */
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Curiculum vitae | Arafian Hafiz</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="asset/css/style.css" />
-</head>
+      /* Particles background */
+      #particles-js {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0; /* paling belakang */
+      }
 
-<body>
-  <header>
-    <nav class="fixed-top">
-      <a href="#" class="logo text-uppercase">Arafian Hafiz</a>
-      <ul id="menuList">
-        <li><a href="#home" class="active ">Home</a></li>
-        <li><a href="#profile">Profile</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: auto;
+        gap: 40px;
+      }
+
+      /* Text on the left */
+      .hero-text {
+        flex: 1;
+        color: white;
+      }
+
+      .hero-text h1 {
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+
+      .hero-text p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        opacity: 0.9;
+      }
+
+      .btn-hero {
+        padding: 12px 25px;
+        background: #ff004f;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+      }
+
+      /* Image on right */
+      .profile-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        z-index: 10;
+      }
+
+      .profile-image img {
+        width: 350px;
+        max-width: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+
+      /* Profile Image Styles from Portofolio 2 */
+      .profile-img {
+        width: 350px;
+        height: 350px;
+        background: #222;
+        border-radius: 20px;
+        position: relative;
+        overflow: visible;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      .profile-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+        transition: all 0.3s ease;
+      }
+
+      .profile-img:hover {
+        background: #fff;
+        border: 3px solid rgba(255, 0, 0, 0.3);
+        box-shadow: 0 0 20px rgb(255, 0, 0)
+      }
+
+      .profile-img.clicked {
+        transform: rotate(5deg) scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.3);
+      }
+
+      .profile-img.clicked img {
+        transform: scale(1.1);
+      }
+
+      .star {
+        position: absolute;
+        color: #ff0000;
+        font-size: 20px;
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+        animation: orbit 5s linear infinite;
+        transform-origin: 50% 50%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .profile-img:hover .star {
+        opacity: 1;
+      }
+
+      .star1 { top: 50%; left: 50%; --radius: 170px; transform: translate(-50%, -50%) translate(170px, 0); animation-delay: 0s; }
+      .star2 { top: 50%; left: 50%; --radius: 180px; transform: translate(-50%, -50%) translate(180px, 0); animation-delay: 0.83s; }
+      .star3 { top: 50%; left: 50%; --radius: 175px; transform: translate(-50%, -50%) translate(175px, 0); animation-delay: 1.67s; }
+      .star4 { top: 50%; left: 50%; --radius: 165px; transform: translate(-50%, -50%) translate(165px, 0); animation-delay: 2.5s; }
+      .star5 { top: 50%; left: 50%; --radius: 185px; transform: translate(-50%, -50%) translate(185px, 0); animation-delay: 3.33s; }
+      .star6 { top: 50%; left: 50%; --radius: 175px; transform: translate(-50%, -50%) translate(175px, 0); animation-delay: 4.17s; }
+
+      @keyframes orbit {
+        0% { transform: translate(-50%, -50%) translate(var(--radius, 175px), 0); }
+        25% { transform: translate(-50%, -50%) translate(0, var(--radius, 175px)); }
+        50% { transform: translate(-50%, -50%) translate(calc(var(--radius, 175px) * -1), 0); }
+        75% { transform: translate(-50%, -50%) translate(0, calc(var(--radius, 175px) * -1)); }
+        100% { transform: translate(-50%, -50%) translate(var(--radius, 175px), 0); }
+      }
+
+      /* Typing Text Styles */
+      .typing-text {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .typed-text {
+        color: #dc143c;
+        font-weight: 500;
+      }
+
+      .cursor {
+        display: inline-block;
+        width: 3px;
+        height: 1.2rem;
+        background-color: #dc143c;
+        animation: blink 1s infinite;
+        vertical-align: text-bottom;
+        margin-left: 2px;
+      }
+
+      .cursor::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: inherit;
+      }
+
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+
+      /* Social Links Styles from Portofolio 1 */
+      .social-links {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .social-links a {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(220, 20, 60, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #dc143c;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        font-size: 1.2rem;
+      }
+
+      .social-links a:hover {
+        background: #dc143c;
+        color: #ffffff;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(220, 20, 60, 0.3);
+        border-color: #dc143c;
+      }
+
+      /* Hamburger Menu Styles */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: #dc143c;
+        margin: 3px 0;
+        transition: 0.3s;
+        border-radius: 2px;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+
+      /* Responsive for mobile */
+      @media screen and (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
+
+        .nav-menu {
+          position: fixed;
+          left: -100%;
+          top: 80px;
+          flex-direction: column;
+          background-color: rgba(17, 17, 17, 0.98);
+          backdrop-filter: blur(15px);
+          width: 100%;
+          text-align: center;
+          transition: 0.3s;
+          padding: 2rem 0;
+          gap: 0;
+          box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-menu.active {
+          left: 0;
+        }
+
+        .nav-menu li {
+          margin: 1rem 0;
+        }
+
+        .nav-link {
+          font-size: 1.1rem;
+        }
+
+        .hero-content {
+          flex-direction: column-reverse;
+          text-align: center;
+        }
+
+        .hero-text h1 {
+          font-size: 36px;
+        }
+
+        .profile-img {
+          width: 250px;
+          height: 250px;
+        }
+
+        .social-links {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body class="font-poppins bg-gray-900 text-white overflow-x-hidden">
+    <nav
+      class="fixed top-0 left-1/2 transform -translate-x-1/2 w-full mx-auto bg-gray-900/95 backdrop-blur-lg z-50 px-8 py-6 h-20 flex justify-between items-center text-lg shadow-lg shadow-primary/20 transition-all duration-300"
+    >
+      <div class="nav-brand">
+        <a href="#home" class="nav-link">
+          <h3 class="text-primary font-semibold text-2xl">ARAFIDEV</h3>
+        </a>
+      </div>
+      <ul class="nav-menu flex gap-8">
+        <li>
+          <a
+            href="#home"
+            class="nav-link text-gray-400 hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:text-white hover:after:w-full"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="#skills"
+            class="nav-link text-gray-400 hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:text-white hover:after:w-full"
+            >Skills</a
+          >
+        </li>
+        <li>
+          <a
+            href="#projects"
+            class="nav-link text-gray-400 hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:text-white hover:after:w-full"
+            >Projects</a
+          >
+        </li>
+        <li>
+          <a
+            href="#stats"
+            class="nav-link text-gray-400 hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:text-white hover:after:w-full"
+            >Stats</a
+          >
+        </li>
+        <li>
+          <a
+            href="#contact"
+            class="nav-link text-gray-400 hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:text-white hover:after:w-full"
+            >Contact</a
+          >
+        </li>
+        <li>
+          <a
+            href="#message"
+            class="nav-link text-gray-400 hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:text-white hover:after:w-full"
+            >Message</a
+          >
+        </li>
       </ul>
-      <div class="menu-icon">
-        <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </nav>
-  </header>
 
-  <section id="home" class="align-items-center justify-content-center text-center">
-    <div class="container">
-      <div class="row align-items-center text-start">
-        <div class="col-md-6 tengah">
-          <p class="">Selamat datang di website saya</p>
-          <h1 class="fw-bold text-light ">Hallo, saya Arafian</h1>
-          <h2 class="fw-bold text-light">Fullstack develover</h2>
-          <a href="mycv.html" type="button" class="btn btn-outline-warning">My CV</a>
-        </div>
-        <div class="col-md-6 text-center">
-          <img src="asset/img/profile.jpg" alt="foto-profil" class="img-fluid rounded" style="width: 300px" />
-        </div>
-      </div>
-    </div>
-    <div class="custom-shape-divider-bottom-1711448800">
-      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path
-          d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-          class="shape-fill"></path>
-      </svg>
-    </div>
-  </section>
+    <section id="Home" class="hero-section">
+      <div id="particles-js"></div>
 
-  <section id="profile">
-    <div class="container reveal">
-      <div class="row align-items-center">
-        <div class="col-lg-7 text-center align-items-center">
-          <img src="asset/img/fotoku.png" alt="fotoku" class="img-fluid" style="width: 400px" />
-        </div>
-        <div class="col-lg-5">
-          <h4 class="fw-bold text-uppercase mb-4">Summary</h4>
-          <p>
-            Lulusan SMK Teknik Jurusan Rekayasa Perangkat Lunak yang
-            memiliki minat yang sangat besar bekerja di Bidang
-            Programmmer. Dengan latar belakang pendidikan pengalaman
-            PKL. saya telah memperoleh pegetahuan dan keterampilan
-            praktis dalam bidang web develover dan game develover.
-            Saya adalah individu yang teliti, analisis, dan memiliki
-            kemampuan pemecahan masalah yang baik.
+      <div class="hero-content pt-20">
+        <div class="hero-text">
+          <div class="greeting">
+            <span class="wave">👋</span>
+            <span>Hi, I'm Arafian</span>
+            <span class="age-tag">2025</span>
+          </div>
+          <h1>Arafian Hafiz</h1>
+          <div class="typing-text">
+            I'm a <span class="typed-text"></span><span class="cursor"></span>
+          </div>
+          <p class="hero-description">
+            Saya seorang siswa smk kelas 12 dan calon web developer yang
+            passionate dalam menciptakan pengalaman digital yang menarik dan
+            fungsional. Dengan fokus pada frontend development dan desain user
+            interface yang responsif.
           </p>
-          <table class="table table-borderless ">
-            <tr>
-              <td>Nama Lengkap</td>
-              <td>:</td>
-              <td>Arafian Hafiz</td>
-            </tr>
-            <tr>
-              <td>Tempat/Tanggal Lahir</td>
-              <td>:</td>
-              <td>Ciamis/01 Januari 2005</td>
-            </tr>
-            <tr>
-              <td>Kebangsaan</td>
-              <td>:</td>
-              <td>Indonesia</td>
-            </tr>
-            <tr>
-              <td>Hobi</td>
-              <td>:</td>
-              <td>Bermain game, mendengarkan musik dan menonton film</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="education">
-    <div class="container reveal">
-      <div class="card shadow p-3 mb-5 mt-5 rounded">
-        <div class="card-title">
-          <ul class="nav nav-underline justify-content-end">
-            <li class="nav-item">
-              <a class="nav-link text-dark N-smk" onclick="navigation('smk')"><svg xmlns="http://www.w3.org/2000/svg"
-                  width="16" height="16" fill="currentColor" class="bi bi-mortarboard-fill" viewBox="0 1 16 16">
-                  <path
-                    d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z" />
-                  <path
-                    d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z" />
-                </svg>
-                School</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-dark N-kuliah" onclick="navigation('kuliah')"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-briefcase-fill" viewBox="0 1 16 16">
-                  <path
-                    d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5" />
-                  <path
-                    d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85z" />
-                </svg>
-                University</a>
-            </li>
-          </ul>
-        </div>
-        <div class="card-body">
-          <h2 class="fw-bold">Education</h2>
-          <div id="smk">
-            <div class="row">
-              <div class="col-lg-4 text-center my-auto">
-                <img src="asset/img/logo-sekolah.png" alt="Logo-Sekolah" class="img-fluid" style="width: 200px;">
-              </div>
-              <div class="col-lg-8">
-                <h4 class="fw-bold text-uppercase">School</h4>
-                <h6>2019 - 2022</h6>
-                <h6 class="fw-bold">Jurusan Rekayasa Perangkat Lunak</h6>
-                <p>SMKN 1 Kawali</p>
-                <p>
-                  Sebagai lulusan SMKN 1 Kawali dengan jurusan Rekayasa Perangkat Lunak, saya telah mengembangkan
-                  keterampilan yang luas dalam berbagai aspek pengembangan perangkat lunak. Selama masa pendidikan,
-                  fokus utama saya adalah memperdalam pemahaman dan keterampilan dalam pengembangan Front-end,
-                  Back-end, Mobile, dan Desktop. Saya juga telah terampil dalam manajemen Database, memastikan
-                  keefisienan dan keamanan data dalam berbagai proyek. Selain itu, kemampuan saya dalam pembuatan
-                  ERD (Entity Relationship Diagram) dan flowchart telah saya kembangkan secara signifikan. Selama
-                  proses belajar, saya telah aktif terlibat dalam proyek-proyek praktis yang memungkinkan saya untuk
-                  menerapkan pengetahuan dan keterampilan yang saya peroleh dalam lingkungan nyata. Hal ini memberi
-                  saya pengalaman berharga dalam menyelesaikan tantangan teknis dan menghasilkan solusi yang efektif
-                  dalam pengembangan perangkat lunak.
-                </p>
-              </div>
+          <div class="cta-buttons">
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-github"></i></a>
             </div>
           </div>
-          <div id="kuliah">
-            <div class="row">
-              <div class="col-lg-4 text-center my-auto">
-                <img src="asset/img/logo-lp3i.png" alt="logo-perusahaan" class="img-fluid" style="width: 200px;">
-              </div>
-              <div class="col-lg-8">
-                <h4 class="fw-bold text-uppercase">University</h4>
-                <h6>2023 - Present</h6>
-                <h6 class="fw-bold">Manajemen Informatika</h6>
-                <p>LP3I Tasikmalaya</p>
-                <p>
-                  Sebagai seorang mahasiswa yang aktif berorganisasi, saya selalu berusaha untuk terlibat dalam
-                  berbagai kegiatan UKM yang relevan dengan minat dan passion saya. Saya percaya bahwa berorganisasi
-                  tidak hanya memperluas jaringan sosial, tetapi juga memperkaya pengalaman belajar di luar ruang
-                  kelas. Dengan aktif berpartisipasi dalam organisasi, saya telah memperoleh keterampilan
-                  kepemimpinan, kemampuan berkomunikasi, serta keterampilan manajemen waktu yang berharga. Selain
-                  itu, saya juga menjunjung tinggi disiplin dalam waktu dan penampilan sebagai seorang mahasiswa.
-                  Saya sadar bahwa waktu adalah aset yang sangat berharga, oleh karena itu, saya selalu berusaha
-                  untuk mengatur jadwal studi dan kegiatan lainnya secara efisien. Disiplin dalam penampilan juga
-                  penting bagi saya karena saya percaya bahwa penampilan yang baik mencerminkan sikap
-                  profesionalisme dan tanggung jawab terhadap diri sendiri serta lingkungan sekitar. Dengan
-                  menggabungkan keterlibatan aktif dalam organisasi dan menjaga disiplin dalam waktu dan penampilan,
-                  saya bertekad untuk menjadi mahasiswa yang produktif, berkontribusi positif, dan siap menghadapi
-                  tantangan di masa depan.
-                </p>
-              </div>
-            </div>
+        </div>
+
+        <div class="profile-image">
+          <div class="profile-img">
+            <img src="asset/img/FotoProfile.JPG" alt="Profile Image">
+            <div class="star star1">★</div>
+            <div class="star star2">★</div>
+            <div class="star star3">★</div>
+            <div class="star star4">★</div>
+            <div class="star star5">★</div>
+            <div class="star star6">★</div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="experience">
-    <div class="container">
-      <div class="card shadow p-3 mb-5 mt-5 rounded">
-        <div class="card-title">
-          <h3 class="fw-bold">Experience</h3>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-4 text-center my-auto">
-              <img src="asset/img/CikaraStudio.png" alt="logo-perusahaan" class="img-fluid" style="width: 300px;">
-            </div>
-            <div class="col-lg-8">
-              <h4 class="fw-bold text-uppercase">Pengalaman</h4>
-              <h6>Oktober - Desember 2022</h6>
-              <p>Cikara Studio</p>
-              <p>
-                Selama periode saya di Cikara Studio, saya terlibat secara
-                langsung dalam proyek pembuatan game Galuh Adventure. Dalam
-                peran saya, saya tidak hanya berpartisipasi dalam
-                pengembangan game secara langsung, tetapi juga secara aktif
-                belajar tentang penggunaan perangkat lunak pengembangan game
-                serta seluk beluk proses pembuatan sebuah game.Selama proses
-                pengembangan game Galuh Adventure, saya belajar banyak
-                tentang dinamika kerja dalam industri game, termasuk
-                bagaimana mengatasi tantangan teknis dan kreatif yang muncul
-                selama pengembangan game.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills" class="reveal">
-    <div class="container reveal">
-      <h1 class="text-center fw-bold">SKILLS</h1>
-      <div class="row row-cols-2 row-cols-md-5 g-4 justify-content-center">
-        <div class="col">
-          <div class="card align-items-center shadow p-3 mb-2 mt-2">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="144" height="144" viewBox="0 0 48 48">
-              <path fill="#E65100" d="M41,5H7l3,34l14,4l14-4L41,5L41,5z"></path>
-              <path fill="#FF6D00" d="M24 8L24 39.9 35.2 36.7 37.7 8z"></path>
-              <path fill="#FFF" d="M24,25v-4h8.6l-0.7,11.5L24,35.1v-4.2l4.1-1.4l0.3-4.5H24z M32.9,17l0.3-4H24v4H32.9z">
-              </path>
-              <path fill="#EEE"
-                d="M24,30.9v4.2l-7.9-2.6L15.7,27h4l0.2,2.5L24,30.9z M19.1,17H24v-4h-9.1l0.7,12H24v-4h-4.6L19.1,17z">
-              </path>
-            </svg>
-            <div class="card-body">
-              <h5 class="card-title">HTML</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card align-items-center shadow p-3 mb-2 mt-2">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="144" height="144" viewBox="0 0 48 48">
-              <path fill="#0277BD" d="M41,5H7l3,34l14,4l14-4L41,5L41,5z"></path>
-              <path fill="#039BE5" d="M24 8L24 39.9 35.2 36.7 37.7 8z"></path>
-              <path fill="#FFF"
-                d="M33.1 13L24 13 24 17 28.9 17 28.6 21 24 21 24 25 28.4 25 28.1 29.5 24 30.9 24 35.1 31.9 32.5 32.6 21 32.6 21z">
-              </path>
-              <path fill="#EEE"
-                d="M24,13v4h-8.9l-0.3-4H24z M19.4,21l0.2,4H24v-4H19.4z M19.8,27h-4l0.3,5.5l7.9,2.6v-4.2l-4.1-1.4L19.8,27z">
-              </path>
-            </svg>
-            <div class="card-body">
-              <h5 class="card-title">CSS</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card align-items-center shadow p-3 mb-2 mt-2">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="144" height="144" viewBox="0 0 48 48">
-              <path fill="#f7df1e" d="M6,42V6h36v36H6z"></path>
-              <path fill="#000001"
-                d="M29.538,32.947c0.692,1.124,1.444,2.201,3.037,2.201c1.338,0,2.04-0.665,2.04-1.585 c0-1.101-0.726-1.492-2.198-2.133l-0.807-0.344c-2.329-0.988-3.878-2.226-3.878-4.841c0-2.41,1.845-4.244,4.728-4.244 c2.053,0,3.528,0.711,4.592,2.573l-2.514,1.607c-0.553-0.988-1.151-1.377-2.078-1.377c-0.946,0-1.545,0.597-1.545,1.377 c0,0.964,0.6,1.354,1.985,1.951l0.807,0.344C36.452,29.645,38,30.839,38,33.523C38,36.415,35.716,38,32.65,38 c-2.999,0-4.702-1.505-5.65-3.368L29.538,32.947z M17.952,33.029c0.506,0.906,1.275,1.603,2.381,1.603 c1.058,0,1.667-0.418,1.667-2.043V22h3.333v11.101c0,3.367-1.953,4.899-4.805,4.899c-2.577,0-4.437-1.746-5.195-3.368 L17.952,33.029z">
-              </path>
-            </svg>
-            <div class="card-body">
-              <h5 class="card-title">Javascript</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card align-items-center shadow p-3 mb-2 mt-2">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="144" height="144" viewBox="0 0 80 80">
-              <path fill="#dcd5f2"
-                d="M40,61.5C18.22,61.5,0.5,51.855,0.5,40S18.22,18.5,40,18.5S79.5,28.145,79.5,40S61.78,61.5,40,61.5z">
-              </path>
-              <path fill="#8b75a1"
-                d="M40,19c21.505,0,39,9.421,39,21S61.505,61,40,61S1,51.579,1,40S18.495,19,40,19 M40,18 C17.909,18,0,27.85,0,40s17.909,22,40,22s40-9.85,40-22S62.091,18,40,18L40,18z">
-              </path>
-              <path fill="#36404d"
-                d="M25.112 34c1.725 0 3.214.622 4.084 1.706.749.934.981 2.171.668 3.577C29.023 43.074 27.395 44 21.57 44h-4.14l1.75-10H25.112M25.112 32H17.5L14 52h2l1.056-6h4.515c5.863 0 9.053-.905 10.246-6.284C32.842 35.096 29.436 32 25.112 32L25.112 32zM61.112 34c1.725 0 3.214.622 4.084 1.706.749.934.981 2.171.668 3.577C65.023 43.074 63.395 44 57.57 44h-4.14l1.75-10H61.112M61.112 32H53.5L50 52h2l1.056-6h4.515c5.863 0 9.053-.905 10.246-6.284C68.842 35.096 65.436 32 61.112 32L61.112 32z">
-              </path>
-              <g>
-                <path fill="#36404d"
-                  d="M49.072,33.212C48.193,32.348,46.644,32,44.334,32h-5.538L40,26h-2.1L34,46h1.99l2.388-12h0.419 h5.538c2.338,0,3.094,0.4,3.335,0.637c0.343,0.338,0.424,1.226,0.217,2.363l-1.767,9h2.106l1.626-8.63 C50.199,35.462,49.936,34.062,49.072,33.212z">
-                </path>
-              </g>
-            </svg>
-            <div class="card-body">
-              <h5 class="card-title">PHP</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card align-items-center shadow p-3 mb-2 mt-2">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="144" height="144" viewBox="0 0 48 48">
-              <path fill="#F44336"
-                d="M23.65,24.898c-0.998-1.609-1.722-2.943-2.725-5.455C19.229,15.2,31.24,11.366,26.37,3.999c2.111,5.089-7.577,8.235-8.477,12.473C17.07,20.37,23.645,24.898,23.65,24.898z">
-              </path>
-              <path fill="#F44336"
-                d="M23.878,17.27c-0.192,2.516,2.229,3.857,2.299,5.695c0.056,1.496-1.447,2.743-1.447,2.743s2.728-0.536,3.579-2.818c0.945-2.534-1.834-4.269-1.548-6.298c0.267-1.938,6.031-5.543,6.031-5.543S24.311,11.611,23.878,17.27z">
-              </path>
-              <g>
-                <path fill="#1565C0"
-                  d="M32.084 25.055c1.754-.394 3.233.723 3.233 2.01 0 2.901-4.021 5.643-4.021 5.643s6.225-.742 6.225-5.505C37.521 24.053 34.464 23.266 32.084 25.055zM29.129 27.395c0 0 1.941-1.383 2.458-1.902-4.763 1.011-15.638 1.147-15.638.269 0-.809 3.507-1.638 3.507-1.638s-7.773-.112-7.773 2.181C11.683 28.695 21.858 28.866 29.129 27.395z">
-                </path>
-                <path fill="#1565C0"
-                  d="M27.935,29.571c-4.509,1.499-12.814,1.02-10.354-0.993c-1.198,0-2.974,0.963-2.974,1.889c0,1.857,8.982,3.291,15.63,0.572L27.935,29.571z">
-                </path>
-                <path fill="#1565C0"
-                  d="M18.686,32.739c-1.636,0-2.695,1.054-2.695,1.822c0,2.391,9.76,2.632,13.627,0.205l-2.458-1.632C24.271,34.404,17.014,34.579,18.686,32.739z">
-                </path>
-                <path fill="#1565C0"
-                  d="M36.281,36.632c0-0.936-1.055-1.377-1.433-1.588c2.228,5.373-22.317,4.956-22.317,1.784c0-0.721,1.807-1.427,3.477-1.093l-1.42-0.839C11.26,34.374,9,35.837,9,37.017C9,42.52,36.281,42.255,36.281,36.632z">
-                </path>
-                <path fill="#1565C0"
-                  d="M39,38.604c-4.146,4.095-14.659,5.587-25.231,3.057C24.341,46.164,38.95,43.628,39,38.604z"></path>
-              </g>
-            </svg>
-            <div class="card-body">
-              <h5 class="card-title">Java</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card align-items-center shadow p-3 mb-2 mt-2">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="144" height="144" viewBox="0 0 48 48">
-              <path fill="#37474f" fill-rule="evenodd"
-                d="M22.903,3.286c0.679-0.381,1.515-0.381,2.193,0 c3.355,1.883,13.451,7.551,16.807,9.434C42.582,13.1,43,13.804,43,14.566c0,3.766,0,15.101,0,18.867 c0,0.762-0.418,1.466-1.097,1.847c-3.355,1.883-13.451,7.551-16.807,9.434c-0.679,0.381-1.515,0.381-2.193,0 c-3.355-1.883-13.451-7.551-16.807-9.434C5.418,34.899,5,34.196,5,33.434c0-3.766,0-15.101,0-18.867 c0-0.762,0.418-1.466,1.097-1.847C9.451,10.837,19.549,5.169,22.903,3.286z"
-                clip-rule="evenodd"></path>
-              <path fill="#546e7a" fill-rule="evenodd"
-                d="M5.304,34.404C5.038,34.048,5,33.71,5,33.255 c0-3.744,0-15.014,0-18.759c0-0.758,0.417-1.458,1.094-1.836c3.343-1.872,13.405-7.507,16.748-9.38 c0.677-0.379,1.594-0.371,2.271,0.008c3.343,1.872,13.371,7.459,16.714,9.331c0.27,0.152,0.476,0.335,0.66,0.576L5.304,34.404z"
-                clip-rule="evenodd"></path>
-              <path fill="#fff" fill-rule="evenodd"
-                d="M24,10c7.727,0,14,6.273,14,14s-6.273,14-14,14 s-14-6.273-14-14S16.273,10,24,10z M24,17c3.863,0,7,3.136,7,7c0,3.863-3.137,7-7,7s-7-3.137-7-7C17,20.136,20.136,17,24,17z"
-                clip-rule="evenodd"></path>
-              <path fill="#455a64" fill-rule="evenodd"
-                d="M42.485,13.205c0.516,0.483,0.506,1.211,0.506,1.784 c0,3.795-0.032,14.589,0.009,18.384c0.004,0.396-0.127,0.813-0.323,1.127L23.593,24L42.485,13.205z"
-                clip-rule="evenodd"></path>
-              <path fill="#fff" fill-rule="evenodd" d="M34 20H35V28H34zM37 20H38V28H37z" clip-rule="evenodd"></path>
-              <path fill="#fff" fill-rule="evenodd" d="M32 25H40V26H32zM32 22H40V23H32z" clip-rule="evenodd"></path>
-            </svg>
-            <div class="card-body">
-              <h5 class="card-title">C#</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card align-items-center shadow p-3 mb-2 mt-2">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="144" height="144" viewBox="0 0 50 50">
-              <path
-                d="M 44.082031 25.207031 L 46.902344 20.429688 C 47.015625 20.191406 47.03125 19.917969 46.945313 19.671875 L 41.359375 3.671875 C 41.1875 3.183594 40.675781 2.90625 40.179688 3.027344 L 23.761719 7.027344 C 23.449219 7.105469 23.191406 7.328125 23.070313 7.628906 L 21.324219 12 L 16 12 C 15.722656 12 15.453125 12.117188 15.265625 12.320313 L 3.265625 25.320313 C 2.894531 25.722656 2.914063 26.347656 3.308594 26.722656 L 15.894531 38.722656 C 16.078125 38.902344 16.328125 39 16.582031 39 L 22.320313 39 L 24.070313 43.371094 C 24.199219 43.695313 24.488281 43.925781 24.828125 43.984375 L 42.289063 46.984375 C 42.34375 46.996094 42.402344 47 42.457031 47 C 42.921875 47 43.332031 46.679688 43.433594 46.214844 L 46.976563 29.984375 C 47.03125 29.734375 46.988281 29.472656 46.851563 29.25 Z M 21.324219 12 L 35.417969 9.417969 L 28 24 L 11.167969 24 Z M 22.324219 39 L 11.167969 28 L 28 28 L 36.75 41.167969 Z M 40.386719 38.898438 L 32 26 L 39.332031 11.417969 L 44.082031 25.210938 Z">
-              </path>
-            </svg>
-            <div class="card-body">
-              <h5 class="card-title">Unity</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="bg-dark">
-    <div class="container reveal text-light">
-      <div class="row g-3">
-        <div class="col-lg-4 text-center">
-          <h4 class="fw-bold">Contact info</h4>
-          <div class="row mt-5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-              class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-              <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-            </svg>
-          </div>
-          <div class="row mt-1">
-            <p class="">Ciamis, Jawa Barat, Indonesia</p>
-          </div>
-          <div class="row mt-5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-              class="bi bi-telephone-fill" viewBox="0 0 16 16">
-              <path fill-rule="evenodd"
-                d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
-            </svg>
-          </div>
-          <div class="row mt-1">
-            <p>+62 848637321</p>
-          </div>
-          <div class="row mt-5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-              class="bi bi-envelope-fill" viewBox="0 0 16 16">
-              <path
-                d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
-            </svg>
-          </div>
-          <div class="row mt-1">
-            <p>ArafianHafiz@gmail.com</p>
-          </div>
-        </div>
-        <div class="col-lg-8">
-          <h4 class="fw-bold">Send your message</h4>
-          <form class="row g-3 mt-5">
-            <div class="col-md-6">
-              <label for="inputEmail4" class="form-label">Email</label>
-              <input type="email" class="form-control" id="inputEmail4">
-            </div>
-            <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Username</label>
-              <input type="password" class="form-control" id="inputPassword4">
-            </div>
-            <div class="col-12">
-              <label for="exampleFormControlTextarea1" class="form-label">Comment</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-            </div>
-            <div class="col-12">
-              <button type="submit" class="btn btn-primary" onclick="alert('Terimakasih atas sarannya')">Kirim</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <div class="row text-light">
-            <div class="d-flex col-md-2 ms-md-auto me-auto my-2 justify-content-between">
-              <a href="https://www.instagram.com/arafi_fz/?igsh=MTBvbXU1eGlrZzNlZQ%3D%3D">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                class="bi bi-instagram " viewBox="0 0 16 16">
-                  <path
-                    d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
-                </svg>
-              </a>
-
-              <a href="https://www.instagram.com/arafi_fz/?igsh=MTBvbXU1eGlrZzNlZQ%3D%3D">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                class="bi bi-facebook " viewBox="0 0 16 16">
-                  <path
-                    d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
-                </svg>
-              </a>
-              
-              <a href="https://www.whatsapp.com/">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                  class="bi bi-whatsapp " viewBox="0 0 16 16">
-                  <path
-                    d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
-                </svg>
-              </a>
-
-              <a href="https://github.com/Arafian01">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                  class="bi bi-github " viewBox="0 0 16 16">
-                  <path
-                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
-                </svg>
-              </a>
+    <!-- <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            
+            <div class="skill-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="frontend">Frontend</button>
+                <button class="filter-btn" data-filter="backend">Backend</button>
+                <button class="filter-btn" data-filter="tools">Tools</button>
             </div>
 
-          </div>
-          <div class="row">
-            <p class="fw-bold text-uppercase text-light">@ 2024 - Arafian hafiz</p>
-          </div>
+            <div class="skills-container">
+                <div class="skills-grid">
+                    <div class="skill-card" data-category="frontend" data-skill="html5">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML5</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="css3">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS3</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="javascript">
+                        <i class="fab fa-js-square"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="react">
+                        <i class="fab fa-react"></i>
+                        <span>React</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="vue">
+                        <i class="fab fa-vue"></i>
+                        <span>Vue.js</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="bootstrap">
+                        <i class="fab fa-bootstrap"></i>
+                        <span>Bootstrap</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="sass">
+                        <i class="fab fa-sass"></i>
+                        <span>SASS</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="tailwind">
+                        <i class="fas fa-wind"></i>
+                        <span>Tailwind</span>
+                    </div>
+
+                    <div class="skill-card" data-category="backend" data-skill="nodejs">
+                        <i class="fab fa-node-js"></i>
+                        <span>Node.js</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="php">
+                        <i class="fab fa-php"></i>
+                        <span>PHP</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="laravel">
+                        <i class="fab fa-laravel"></i>
+                        <span>Laravel</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="mysql">
+                        <i class="fas fa-database"></i>
+                        <span>MySQL</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="mongodb">
+                        <i class="fas fa-leaf"></i>
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="firebase">
+                        <i class="fas fa-fire"></i>
+                        <span>Firebase</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="express">
+                        <i class="fas fa-server"></i>
+                        <span>Express.js</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="python">
+                        <i class="fab fa-python"></i>
+                        <span>Python</span>
+                    </div>
+
+                    <div class="skill-card" data-category="tools" data-skill="git">
+                        <i class="fab fa-git-alt"></i>
+                        <span>Git</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="github">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="figma">
+                        <i class="fab fa-figma"></i>
+                        <span>Figma</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="vscode">
+                        <i class="fas fa-code"></i>
+                        <span>VS Code</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="npm">
+                        <i class="fab fa-npm"></i>
+                        <span>NPM</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="docker">
+                        <i class="fab fa-docker"></i>
+                        <span>Docker</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="terminal">
+                        <i class="fas fa-terminal"></i>
+                        <span>Terminal</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="adobe">
+                        <i class="fab fa-adobe"></i>
+                        <span>Adobe XD</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </footer>
+    </section> -->
 
-  <script>
-    document.getElementById("smk").style.display = "block";
-    document.getElementById("kuliah").style.display = "none";
-    document.querySelector(".N-smk").classList.add("active");
-    document.querySelector(".N-kuliah").classList.remove("active");
-    function navigation(id) {
-      if (id === "smk") {
-        document.getElementById("smk").style.display = "block";
-        document.getElementById("kuliah").style.display = "none";
-        document.querySelector(".N-smk").classList.add("active");
-        document.querySelector(".N-kuliah").classList.remove("active");
-      } else if (id === "kuliah") {
-        document.getElementById("smk").style.display = "none";
-        document.getElementById("kuliah").style.display = "block";
-        document.querySelector(".N-kuliah").classList.add("active");
-        document.querySelector(".N-smk").classList.remove("active");
-      }
-    }
-  </script>
-  <script src="asset/js/script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="https://kit.fontawesome.com/28b758967f.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-    crossorigin="anonymous"></script>
-</body>
+    <!-- Skills Section -->
+    <!-- <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            
+            <div class="skill-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="frontend">Frontend</button>
+                <button class="filter-btn" data-filter="backend">Backend</button>
+                <button class="filter-btn" data-filter="tools">Tools</button>
+            </div>
 
+            <div class="skills-container">
+                <div class="skills-grid">
+                    <div class="skill-card" data-category="frontend" data-skill="html5">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML5</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="css3">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS3</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="javascript">
+                        <i class="fab fa-js-square"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="react">
+                        <i class="fab fa-react"></i>
+                        <span>React</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="vue">
+                        <i class="fab fa-vue"></i>
+                        <span>Vue.js</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="bootstrap">
+                        <i class="fab fa-bootstrap"></i>
+                        <span>Bootstrap</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="sass">
+                        <i class="fab fa-sass"></i>
+                        <span>SASS</span>
+                    </div>
+                    <div class="skill-card" data-category="frontend" data-skill="tailwind">
+                        <i class="fas fa-wind"></i>
+                        <span>Tailwind</span>
+                    </div>
+
+                    <div class="skill-card" data-category="backend" data-skill="nodejs">
+                        <i class="fab fa-node-js"></i>
+                        <span>Node.js</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="php">
+                        <i class="fab fa-php"></i>
+                        <span>PHP</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="laravel">
+                        <i class="fab fa-laravel"></i>
+                        <span>Laravel</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="mysql">
+                        <i class="fas fa-database"></i>
+                        <span>MySQL</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="mongodb">
+                        <i class="fas fa-leaf"></i>
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="firebase">
+                        <i class="fas fa-fire"></i>
+                        <span>Firebase</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="express">
+                        <i class="fas fa-server"></i>
+                        <span>Express.js</span>
+                    </div>
+                    <div class="skill-card" data-category="backend" data-skill="python">
+                        <i class="fab fa-python"></i>
+                        <span>Python</span>
+                    </div>
+
+                    <div class="skill-card" data-category="tools" data-skill="git">
+                        <i class="fab fa-git-alt"></i>
+                        <span>Git</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="github">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="figma">
+                        <i class="fab fa-figma"></i>
+                        <span>Figma</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="vscode">
+                        <i class="fas fa-code"></i>
+                        <span>VS Code</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="npm">
+                        <i class="fab fa-npm"></i>
+                        <span>NPM</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="docker">
+                        <i class="fab fa-docker"></i>
+                        <span>Docker</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="terminal">
+                        <i class="fas fa-terminal"></i>
+                        <span>Terminal</span>
+                    </div>
+                    <div class="skill-card" data-category="tools" data-skill="adobe">
+                        <i class="fab fa-adobe"></i>
+                        <span>Adobe XD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Brands Section -->
+    <!-- <section id="brands" class="brands">
+        <div class="container">
+            <h2 class="section-title"></h2>
+            <p></p>
+            <div class="brand-slider">
+                <div class="brand-track">
+                    <div class="brand-item" data-brand="google">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="brand-item" data-brand="facebook">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <div class="brand-item" data-brand="youtube">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="brand-item" data-brand="github">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="brand-item" data-brand="microsoft">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <div class="brand-item" data-brand="apple">
+                        <i class="fab fa-apple"></i>
+                    </div>
+                    <div class="brand-item" data-brand="dribbble">
+                        <i class="fab fa-dribbble"></i>
+                    </div>
+                    <div class="brand-item" data-brand="spotify">
+                        <i class="fab fa-spotify"></i>
+                    </div>
+                    <div class="brand-item" data-brand="google">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="brand-item" data-brand="facebook">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <div class="brand-item" data-brand="youtube">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="brand-item" data-brand="github">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="brand-item" data-brand="microsoft">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <div class="brand-item" data-brand="apple">
+                        <i class="fab fa-apple"></i>
+                    </div>
+                    <div class="brand-item" data-brand="dribbble">
+                        <i class="fab fa-dribbble"></i>
+                    </div>
+                    <div class="brand-item" data-brand="spotify">
+                        <i class="fab fa-spotify"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Projects Section -->
+    <!-- <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <img src="img1.jpg" alt="E-Commerce Website">
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>E-Commerce Website</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">PHP</span>
+                        </div>
+                        <p>Full-stack e-commerce platform dengan fitur keranjang belanja, pembayaran online, dan dashboard admin.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <img src="img2.jpg" alt="Restaurant App">
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Restaurant App</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <p>Aplikasi pemesanan makanan online dengan fitur real-time tracking dan sistem rating.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <img src="img3.jpg" alt="Dashboard Analytics">
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Dashboard Analytics</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <p>Dashboard interaktif untuk visualisasi data bisnis dengan berbagai chart dan grafik.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <img src="img4.jpg" alt="Learning Management System">
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Learning Management System</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">Bootstrap</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <p>Platform pembelajaran online dengan fitur video streaming, quiz, dan progress tracking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Statistics -->
+    <!-- <section id="stats" class="stats">
+        <div class="container">
+            <h2 class="section-title">Stats</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 class="stat-number" data-target="50">0+</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number" data-target="30">0+</h3>
+                    <p>Happy Clients</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number" data-target="100">0+</h3>
+                    <p>Cups of Coffee</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number" data-target="5">0+</h3>
+                    <p>Years Experience</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Contact Section -->
+    <!-- <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            
+            <div class="contact-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="personal">Personal</button>
+                <button class="filter-btn" data-filter="business">Business</button>
+                <button class="filter-btn" data-filter="social">Social</button>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-grid">
+                    <div class="contact-card" data-category="personal" data-contact="email">
+                        <i class="fas fa-envelope"></i>
+                        <span>arafian@example.com</span>
+                    </div>
+                    <div class="contact-card" data-category="personal" data-contact="phone">
+                        <i class="fas fa-phone"></i>
+                        <span>+62 857-9720-6013</span>
+                    </div>
+                    <div class="contact-card" data-category="personal" data-contact="whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>+62 857-9720-6013</span>
+                    </div>
+                    <div class="contact-card" data-category="personal" data-contact="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Indonesia</span>
+                    </div>
+
+                    <div class="contact-card" data-category="business" data-contact="work">
+                        <i class="fas fa-briefcase"></i>
+                        <span>work@arafian.dev</span>
+                    </div>
+                    <div class="contact-card" data-category="business" data-contact="linkedin">
+                        <i class="fab fa-linkedin"></i>
+                        <span>linkedin.com/in/arafian</span>
+                    </div>
+                    <div class="contact-card" data-category="business" data-contact="website">
+                        <i class="fas fa-globe"></i>
+                        <span>arafian.dev</span>
+                    </div>
+                    <div class="contact-card" data-category="business" data-contact="cv">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Download CV</span>
+                    </div>
+                    <div class="contact-card" data-category="business" data-contact="meeting">
+                        <i class="fas fa-calendar"></i>
+                        <span>Schedule Meeting</span>
+                    </div>
+                    <div class="contact-card" data-category="business" data-contact="collaborate">
+                        <i class="fas fa-handshake"></i>
+                        <span>Collaborate</span>
+                    </div>
+
+                    <div class="contact-card" data-category="social" data-contact="github">
+                        <i class="fab fa-github"></i>
+                        <span>github.com/arafian</span>
+                    </div>
+                    <div class="contact-card" data-category="social" data-contact="instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>@arafian</span>
+                    </div>
+                    <div class="contact-card" data-category="social" data-contact="twitter">
+                        <i class="fab fa-twitter"></i>
+                        <span>@arafian</span>
+                    </div>
+                    <div class="contact-card" data-category="social" data-contact="youtube">
+                        <i class="fab fa-youtube"></i>
+                        <span>Arafian Dev</span>
+                    </div>
+                    <div class="contact-card" data-category="social" data-contact="discord">
+                        <i class="fab fa-discord"></i>
+                        <span>arafian</span>
+                    </div>
+                    <div class="contact-card" data-category="social" data-contact="telegram">
+                        <i class="fab fa-telegram"></i>
+                        <span>@arafian</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  -->
+    <!-- <section id="message" class="message"> 
+        <div class="container">
+            <div class="contact-form-section">
+                <h2 class="section-title">Send Message</h2>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+     </section> -->
+
+    <!-- Footer -->
+    <!-- <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Arafian Dev. All Rights Reserved.</p>
+        </div>
+    </footer> -->
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
